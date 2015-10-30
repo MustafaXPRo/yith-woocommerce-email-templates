@@ -54,7 +54,7 @@ if( !class_exists( 'YITH_WCET_Admin' ) ) {
         /**
          * @var string Premium version landing link
          */
-        protected $_premium_landing = '#';
+        protected $_premium_landing = 'https://yithemes.com/themes/plugins/yith-woocommerce-email-templates/';
 
         /**
          * @var string Quick View panel page
@@ -127,6 +127,9 @@ if( !class_exists( 'YITH_WCET_Admin' ) ) {
 
             add_filter('woocommerce_email_settings', array( $this, 'email_extra_settings') );
             add_filter( 'yith_wcet_panel_settings_options', array($this, 'add_email_extra_settings_in_tab_settings'));
+
+            // Premium Tabs
+            add_action( 'yith_wcet_premium_tab', array( $this, 'show_premium_tab' ) );
 		 }
 
         /**
@@ -423,6 +426,9 @@ if( !class_exists( 'YITH_WCET_Admin' ) ) {
         public function action_links( $links ) {
 
             $links[] = '<a href="' . admin_url( "admin.php?page={$this->_panel_page}" ) . '">' . __( 'Settings', 'yith-wcet' ) . '</a>';
+            if ( defined( 'YITH_WCET_FREE_INIT' ) ) {
+                $links[] = '<a href="' . $this->_premium_landing . '" target="_blank">' . __( 'Premium Version', 'ywcm' ) . '</a>';
+            }
 
             return $links;
         }
@@ -466,7 +472,7 @@ if( !class_exists( 'YITH_WCET_Admin' ) ) {
 
             $admin_tabs_free = array(
                 'settings'      => __( 'Settings', 'yith-wcet' ),
-                //'premium'       => __( 'Premium Version', 'yith-wcet' )
+                'premium'       => __( 'Premium Version', 'yith-wcet' )
                 );
 
             $admin_tabs = apply_filters('yith_wcet_settings_admin_tabs', $admin_tabs_free);
@@ -492,7 +498,30 @@ if( !class_exists( 'YITH_WCET_Admin' ) ) {
             $this->_panel = new YIT_Plugin_Panel_WooCommerce( $args );
             
             add_action( 'woocommerce_admin_field_yith_wcet_upload', array( $this->_panel, 'yit_upload' ), 10, 1 );
-            add_action( 'woocommerce_update_option_yith_wcet_upload', array( $this->_panel, 'yit_upload_update' ), 10, 1 );
+            //add_action( 'woocommerce_update_option_yith_wcet_upload', array( $this->_panel, 'yit_upload_update' ), 10, 1 );
+        }
+
+        /**
+         * Show premium landing tab
+         *
+         * @return   void
+         * @since    1.0
+         * @author   Leanza Francesco <leanzafrancesco@gmail.com>
+         */
+        public function show_premium_tab(){
+            $landing = YITH_WCET_TEMPLATE_PATH . '/premium.php';
+            file_exists( $landing ) && require( $landing );
+        }
+
+        /**
+         * Get the premium landing uri
+         *
+         * @since   1.0.0
+         * @author  Andrea Grillo <andrea.grillo@yithemes.com>
+         * @return  string The premium landing link
+         */
+        public function get_premium_landing_uri() {
+            return defined( 'YITH_REFER_ID' ) ? $this->_premium_landing . '?refer_id=' . YITH_REFER_ID : $this->_premium_landing . '?refer_id=1030585';
         }
 
         public function admin_enqueue_scripts() {

@@ -25,7 +25,7 @@ $show_image      = ( isset( $meta['show_prod_thumb'] ) ) ? $meta['show_prod_thum
 
 <p><?php printf( __( 'You have received an order from %s. The order is as follows:', 'woocommerce' ), __('User', 'woocommerce') ); ?></p>
 
-<?php do_action( 'woocommerce_email_before_order_table', $order, true, false ); ?>
+<?php do_action( 'woocommerce_email_before_order_table', false , true, false ); ?>
 
 <h2><a href=""><?php printf( __( 'Order #%s', 'woocommerce'), 1 ); ?></a> (<?php printf( '<time datetime="%s">%s</time>', date_i18n( 'c', strtotime( date('F j, Y') ) ), date_i18n( wc_date_format(), strtotime( date('F j, Y') ) ) ); ?>)</h2>
 

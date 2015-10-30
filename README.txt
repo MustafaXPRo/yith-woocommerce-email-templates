@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: email, mail, template, templates, email template, email templates, woocommerce, products, themes, yit, e-commerce, shop, yith, premium, yithemes
 Requires at least: 3.5.1
-Tested up to: 4.1.1
-Stable tag: 1.0.0
+Tested up to: 4.3.1
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,21 @@ YITH WooCommerce Email Tempates will add a new submenu called "Email Tempates" u
 4. "New order" email preview
 
 == Changelog ==
+
+= 1.1.3 =
+
+* Fixed: minor bug
+
+= 1.1.2 =
+
+* Fixed: First WooCommerce order email kept WooCommerce template style
+
+= 1.1.0 =
+
+* Added: Support to WordPress 4.2.4
+* Added: Support to WooCommerce 2.4.4
+
+* Initial release
 
 = 1.0.0 =
 

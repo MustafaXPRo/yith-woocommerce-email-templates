@@ -1,17 +1,17 @@
 <?php
 /**
 * Plugin Name: YITH WooCommerce Email Templates
-* Plugin URI: http://yithemes.com/
+* Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-email-templates/
 * Description: YITH WooCommerce Email Templates allows you to create and manage custom email templates for Woocommerce.
-* Version: 1.0.0
+* Version: 1.1.3
 * Author: Yithemes
 * Author URI: http://yithemes.com/
 * Text Domain: yith-wcet
 * Domain Path: /languages/
 *
-* @author Yithemes
+* @author yithemes
 * @package YITH WooCommerce Email Templates
-* @version 1.0.0
+* @version 1.1.3
 */
 /*  Copyright 2015  Your Inspiration Themes  (email : plugins@yithemes.com)
 
@@ -61,7 +61,7 @@ register_activation_hook( __FILE__, 'yith_plugin_registration_hook' );
 
 
 if ( ! defined( 'YITH_WCET_VERSION' ) ){
-    define( 'YITH_WCET_VERSION', '1.0.0' );
+    define( 'YITH_WCET_VERSION', '1.1.3' );
 }
 
 if ( ! defined( 'YITH_WCET_FREE_INIT' ) ) {
@@ -98,8 +98,8 @@ function yith_wcet_init() {
     load_plugin_textdomain( 'yith-wcet', false, dirname( plugin_basename( __FILE__ ) ). '/languages/' );
 
     // Load required classes and functions
+    require_once('functions.yith-wcet.php');
     require_once('class.yith-wcet-admin.php');
-    require_once('class.yith-wcet-frontend.php');
     require_once('class.yith-wcet.php');
 
     // Let's start the game!
@@ -122,3 +122,9 @@ function yith_wcet_install() {
     }
 }
 add_action( 'plugins_loaded', 'yith_wcet_install', 11 );
+
+/* Plugin Framework Version Check */
+if ( !function_exists( 'yit_maybe_plugin_fw_loader' ) && file_exists( plugin_dir_path( __FILE__ ) . 'plugin-fw/init.php' ) ) {
+    require_once( plugin_dir_path( __FILE__ ) . 'plugin-fw/init.php' );
+}
+yit_maybe_plugin_fw_loader( plugin_dir_path( __FILE__ ) );
